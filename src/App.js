@@ -1,25 +1,22 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter } from "react-router-dom";
+import Route from "./Routes";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const baseTheme = createTheme();
+if (`${process.env.REACT_APP_NODE_ENV}` === "production") {
+  console.log = () => {};
+  console.error = () => {};
+  console.debug = () => {};
+  console.warn = () => {};
 }
+const App = () => (
+  <BrowserRouter>
+    <ThemeProvider theme={baseTheme}>
+      <div className="App">
+        <Route />
+      </div>
+    </ThemeProvider>
+  </BrowserRouter>
+);
 
 export default App;
