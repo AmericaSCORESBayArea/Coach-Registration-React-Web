@@ -13,7 +13,7 @@ export default function HomeScreen() {
   const confirmedRegistration = () => {
     window.open("https://scoresu.org/coach", "_self");
   };
-  const handleSubmit = (/*response*/) => {
+  const handleSubmit = (response) => {
     const register_modal_success = {
       modal_title: "Successful registration",
       modal_text: `You have been successfully registered.<br /><b style="font-size:17px;" align="center">Download our app to start taking attendance.<br /><br /><a href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180" 
