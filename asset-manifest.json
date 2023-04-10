@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Coach-Registration-React-Web-/static/css/main.29e8ab88.css",
-    "main.js": "/Coach-Registration-React-Web-/static/js/main.c2e7ec51.js",
+    "main.js": "/Coach-Registration-React-Web-/static/js/main.9a0ba184.js",
     "static/js/787.99481dea.chunk.js": "/Coach-Registration-React-Web-/static/js/787.99481dea.chunk.js",
     "static/media/America-SCORES-Logo.jpg": "/Coach-Registration-React-Web-/static/media/America-SCORES-Logo.8961a7fd3a6bce9e50cb.jpg",
     "index.html": "/Coach-Registration-React-Web-/index.html",
     "main.29e8ab88.css.map": "/Coach-Registration-React-Web-/static/css/main.29e8ab88.css.map",
-    "main.c2e7ec51.js.map": "/Coach-Registration-React-Web-/static/js/main.c2e7ec51.js.map",
+    "main.9a0ba184.js.map": "/Coach-Registration-React-Web-/static/js/main.9a0ba184.js.map",
     "787.99481dea.chunk.js.map": "/Coach-Registration-React-Web-/static/js/787.99481dea.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.29e8ab88.css",
-    "static/js/main.c2e7ec51.js"
+    "static/js/main.9a0ba184.js"
   ]
 }
