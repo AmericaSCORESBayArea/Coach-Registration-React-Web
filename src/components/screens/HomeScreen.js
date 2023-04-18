@@ -11,7 +11,8 @@ export default function HomeScreen() {
     setHeight(window.innerHeight - 300);
   };
   const confirmedRegistration = () => {
-    window.parent.location.open("https://scoresu.org/coach", "_self");
+    window.top.location.href = 'https://scoresu.org/coach';
+    //window.parent.location.open("https://scoresu.org/coach", "_self");
   };
   const handleSubmit = (response) => {
     const register_modal_success = {
