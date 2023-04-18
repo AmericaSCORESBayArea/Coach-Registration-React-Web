@@ -4,11 +4,11 @@ import { SuccessModal } from "../utils/Modal";
 
 export default function HomeScreen() {
   const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
+  const [height, setHeight] = useState(window.innerHeight - 500);
   const form_id = `${process.env.REACT_APP_TYPEFORM_FORM_ID}`;
   const updateDimensions = () => {
     setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
+    setHeight(window.innerHeight - 500);
   };
   const confirmedRegistration = () => {
     window.open("https://scoresu.org/coach", "_self");
