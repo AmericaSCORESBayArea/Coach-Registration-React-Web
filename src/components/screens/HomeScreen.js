@@ -57,7 +57,7 @@ export default function HomeScreen() {
         const error_modal = {
           modal_title: "Server error [500]",
           modal_text: `There is an issue with our server. If this persists, please contact us.`,
-          modal_confirm_button: "DONE",
+          modal_confirm_button: "OK",
         };
         SuccessModal(error_modal, "error", confirmedError);
         console.log("error", error);
