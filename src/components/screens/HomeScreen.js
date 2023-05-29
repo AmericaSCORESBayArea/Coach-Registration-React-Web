@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import HomeScreen_NewCoach from "./HomeScreen_NewCoach";
-import Cookies from "js-cookie";
 import EditForm from "./EditForm";
 import Loading from "../utils/Loading";
 export default function HomeScreen() {
@@ -49,7 +48,7 @@ export default function HomeScreen() {
         })
         .catch((error) => console.log("error", error));
     }
-    getContactInfo(Cookies.get("coach_phoneNumber"));
+    getContactInfo(localStorage.getItem("coach_phoneNumber"));
   }, []);
   return (
     <div>

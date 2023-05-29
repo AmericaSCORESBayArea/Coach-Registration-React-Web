@@ -8,13 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import firebase from "../../firebase/firebaseConfig";
 import { ModalwithConfirmation } from "./Modal";
-import Cookies from "js-cookie";
 
 function NavbarComponent(props) {
   const history = useNavigate();
   const confirmedLogout = () => {
     firebase.auth().signOut();
-    Cookies.set("coach_user", false);
+    localStorage.setItem("coach_user", false);
     history({ pathname: "/Login" });
   };
 
