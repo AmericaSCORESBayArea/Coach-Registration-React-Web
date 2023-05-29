@@ -1,0 +1,525 @@
+[
+  {
+    "schoolName": "Bessie Carmichael",
+    "siteId": "0011T00002WeQTgQAN"
+  },
+  {
+    "schoolName": "Bret Harte Elementary School",
+    "siteId": "0015000002HvvVpAAJ"
+  },
+  {
+    "schoolName": "Bryant Elementary School",
+    "siteId": "0015000002HvvVdAAJ"
+  },
+  {
+    "schoolName": "Cleveland Elementary School",
+    "siteId": "0015000002HvvW0AAJ"
+  },
+  {
+    "schoolName": "ER Taylor Elementary School",
+    "siteId": "0015000002HvvVrAAJ"
+  },
+  {
+    "schoolName": "Everett Middle School",
+    "siteId": "0015000002HvvWTAAZ"
+  },
+  {
+    "schoolName": "Flynn Elementary School",
+    "siteId": "Francisco"
+  },
+  {
+    "schoolName": "Francisco Middle School",
+    "siteId": "0011T00002KIFpKQAX"
+  },
+  {
+    "schoolName": "Hillcrest Elementary School",
+    "siteId": "0015000002HvvVoAAJ"
+  },
+  {
+    "schoolName": "Indochinese Housing Development Corporation - Lead Agency",
+    "siteId": "0011T00002XUqqMQAT"
+  },
+  {
+    "schoolName": "John Muir Elementary School",
+    "siteId": "0015000002HvvW3AAJ"
+  },
+  {
+    "schoolName": "Joseph Lee Rec Center Bayview",
+    "siteId": "0011T00002KKlkVQAT"
+  },
+  {
+    "schoolName": "Junipero Serra Elementary",
+    "siteId": "0015000001EPaDnAAL"
+  },
+  {
+    "schoolName": "Marshall Elementary School",
+    "siteId": "0015000002HvvVjAAJ"
+  },
+  {
+    "schoolName": "MLK Academic Middle School SF",
+    "siteId": "0015000002HvvWUAAZ"
+  },
+  {
+    "schoolName": "Paul Revere Elementary School",
+    "siteId": "0015000002HvvVyAAJ"
+  },
+  {
+    "schoolName": "Paul Revere Middle School",
+    "siteId": "0011T00002KIWZnQAP"
+  },
+  {
+    "schoolName": "Redding Elementary School",
+    "siteId": "0015000002HvvW4AAJ"
+  },
+  {
+    "schoolName": "Salvation Army Kroc Center - Program Site",
+    "siteId": "0015000002HvvW2AAJ"
+  },
+  {
+    "schoolName": "Sanchez Elementary School",
+    "siteId": "0015000002HvvVeAAJ"
+  },
+  {
+    "schoolName": "TECA Middle School - Program Site",
+    "siteId": "0011T00002KIWaHQAX"
+  },
+  {
+    "schoolName": "TECA Elementary School - Program Site",
+    "siteId": "0015000002HvvVXAAZ"
+  },
+  {
+    "schoolName": "Up on Top - Program Site",
+    "siteId": "0015000002HvvVmAAJ"
+  },
+  {
+    "schoolName": "Visitation Valley Middle School",
+    "siteId": "0015000002HvvWSAAZ"
+  },
+  {
+    "schoolName": "Willie Brown Middle School",
+    "siteId": "0011T00002O0xX0QAJ"
+  },
+  {
+    "schoolName": "Bowman Elementary School",
+    "siteId": "0011T00002O0xVcQAJ"
+  },
+  {
+    "schoolName": "Bret Harte Hayward Middle School",
+    "siteId": "0015000002HvvWaAAJ"
+  },
+  {
+    "schoolName": "Burbank Elementary School",
+    "siteId": "0011T00002KIFpHQAX"
+  },
+  {
+    "schoolName": "Cesar Chavez Middle School",
+    "siteId": "0015000002HvvWWAAZ"
+  },
+  {
+    "schoolName": "Cherryland Elementary School",
+    "siteId": "0011T00002KIFpIQAX"
+  },
+  {
+    "schoolName": "East Avenue Elementary School",
+    "siteId": "0011T00002KIFpJQAX"
+  },
+  {
+    "schoolName": "Eden Gardens Elementary School",
+    "siteId": "0011T00002KK9veQAD"
+  },
+  {
+    "schoolName": "Eldridge Elementary School",
+    "siteId": "0011T00002O0xVmQAJ"
+  },
+  {
+    "schoolName": "Fairview Elementary School",
+    "siteId": "0011T00002O0xWLQAZ"
+  },
+  {
+    "schoolName": "Faith Ringgold Elementary School",
+    "siteId": "0011T00002O0xW1QAJ"
+  },
+  {
+    "schoolName": "Glassbrook Elementary School",
+    "siteId": "0015000002HvvWeAAJ"
+  },
+  {
+    "schoolName": "Harder Elementary School",
+    "siteId": "0015000002HvvWfAAJ"
+  },
+  {
+    "schoolName": "Longwood Elementary School Hayward",
+    "siteId": "0015000002HvvWcAAJ"
+  },
+  {
+    "schoolName": "Lorin Eden Elementary School",
+    "siteId": "0011T00002KK9vKQAT"
+  },
+  {
+    "schoolName": "MLK Middle School Hayward",
+    "siteId": "0015000002HvvWXAAZ"
+  },
+  {
+    "schoolName": "Ochoa Middle School",
+    "siteId": "0015000002HvvWZAAZ"
+  },
+  {
+    "schoolName": "Palma Ceia Elementary School",
+    "siteId": "0015000002HvvWdAAJ"
+  },
+  {
+    "schoolName": "Park Elementary School",
+    "siteId": "0011T00002KIFpRQAX"
+  },
+  {
+    "schoolName": "Ruus Elementary School",
+    "siteId": "0011T00002O0xWBQAZ"
+  },
+  {
+    "schoolName": "Schafer Elementary School",
+    "siteId": "0011T00002O0xWuQAJ"
+  },
+  {
+    "schoolName": "Southgate Elementary School",
+    "siteId": "0011T00002KK9vAQAT"
+  },
+  {
+    "schoolName": "Stonebrae Elementary School",
+    "siteId": "0011T00002KIFpTQAX"
+  },
+  {
+    "schoolName": "Strobridge Elementary School",
+    "siteId": "0011T00002KIFpUQAX"
+  },
+  {
+    "schoolName": "Treeview Elementary School",
+    "siteId": "0011T00002O0xWzQAJ"
+  },
+  {
+    "schoolName": "Tyrrell Elementary School",
+    "siteId": "0011T00002N2jMpQAJ"
+  },
+  {
+    "schoolName": "Winton Middle School",
+    "siteId": "0015000002HvvWYAAZ"
+  },
+  { "schoolName": "Allendale", "siteId": "0011T00002cv1e7QAA" },
+  { "schoolName": "ASCEND Elementary School", "siteId": "0015000002HvvWDAAZ" },
+  {
+    "schoolName": "EnCompass Elementary School",
+    "siteId": "0015000002HvvWPAAZ"
+  },
+  {
+    "schoolName": "Esperanza Elementary School",
+    "siteId": "0015000002HvvWEAAZ"
+  },
+  {
+    "schoolName": "Global Family Elementary School",
+    "siteId": "0015000002HvvWJAAZ"
+  },
+  {
+    "schoolName": "Global Family Elementary School",
+    "siteId": "0015000002HvvWJAAZ"
+  },
+  {
+    "schoolName": "Greenleaf Elementary School",
+    "siteId": "0015000002HvvWOAAZ"
+  },
+  {
+    "schoolName": "International Community School & Think College Now",
+    "siteId": "0015000002HvvVxAAJ"
+  },
+  {
+    "schoolName": "Learning Without Limits Elementary School",
+    "siteId": "0011T00002NzrmTQAR"
+  },
+  { "schoolName": "Life Academy", "siteId": "0011T00002U1eOIQAZ" },
+  { "schoolName": "Madison Park Primary", "siteId": "0011T00002O0xWkQAJ" },
+  {
+    "schoolName": "Manzanita Community School & Manzanita SEED",
+    "siteId": "0015000002HvvWGAAZ"
+  },
+  {
+    "schoolName": "MLK Lafayette Elementary School",
+    "siteId": "0015000002HvvWRAAZ"
+  },
+  {
+    "schoolName": "Oakland Academy of Knowledge",
+    "siteId": "0015000002HvvWKAAZ"
+  },
+  { "schoolName": "Sankofa United", "siteId": "0011T00002bMnotQAC" },
+  {
+    "schoolName": "Bahia Vista Elementary School",
+    "siteId": "0015000002HvvWAAAZ"
+  },
+  { "schoolName": "Coleman Elementary School", "siteId": "0015000002HvvWCAAZ" },
+  { "schoolName": "Davidson Middle School", "siteId": "0015000002HvvW6AAJ" },
+  {
+    "schoolName": "Laurel Dell Elementary School",
+    "siteId": "0015000002HvvW7AAJ"
+  },
+  {
+    "schoolName": "San Pedro Elementary School",
+    "siteId": "0015000002HvvW8AAJ"
+  },
+  { "schoolName": "Venetia Valley K-8 School", "siteId": "0015000002HvvW9AAJ" },
+  {
+    "schoolName": "Riverside Elementary School",
+    "siteId": "0011T00002a9CThQAM"
+  },
+  { "schoolName": "Gateway Middle School", "siteId": "0011T00002YSKWlQAP" },
+  {
+    "schoolName": "San Rafael All Stars and Laureates",
+    "siteId": "0011T00002WagLdQAJ"
+  },
+  {
+    "schoolName": "Jefferson Elementary School District",
+    "siteId": "0011T00002WaxaFQAR"
+  },
+  {
+    "schoolName": "Bessie Carmichael Elementary School",
+    "siteId": "0011T00002WeQTgQAN"
+  },
+  {
+    "schoolName": "Coliseum Collegiate Prep Academy",
+    "siteId": "0011T00002WeVeaQAF"
+  },
+  { "schoolName": "Windmill Springs", "siteId": "0011T00002bKI34QAG" },
+  { "schoolName": "Kennedy Elementary", "siteId": "0011T00002bKI35QAG" },
+  { "schoolName": "Sylvandale Middle School", "siteId": "0011T00002bKI0ZQAW" },
+  { "schoolName": "Empire Gardens Elementary", "siteId": "0011T00002bKI3JQAW" },
+  { "schoolName": "Kipp Elementary", "siteId": "0011T00002bKI3KQAW" },
+  {
+    "schoolName": "Brookfield Village Elementary",
+    "siteId": "0011T00002diMt7QAE"
+  },
+  {
+    "schoolName": "Boys & Girls Club Santa Cruz County",
+    "siteId": "0011T00002fOkKsQAK"
+  },
+  { "schoolName": "Santa Rosa City Schools", "siteId": "0011T00002fPwYoQAK" },
+  {
+    "schoolName": "Sunset Elementary School",
+    "siteId": "0011T00002fPoTWQA0"
+  },
+  {
+    "schoolName": "Helen Lehman Elementary",
+    "siteId": "0011T00002eQOpTQAW"
+  },
+  {
+    "schoolName": "Allendale Elementary School",
+    "siteId": "0011T00002foDpNQAU"
+  },
+  {
+    "schoolName": "The Mission Preparatory School",
+    "siteId": "0011T00002gf2FuQAI"
+  },
+  {
+    "schoolName": "El Dorado Elementary School",
+    "siteId": "0015000001EPZMaAAP"
+  },
+  {
+    "schoolName": "Herbert Hoover Middle School",
+    "siteId": "0011T00002KIFpLQAX"
+  },
+  {
+    "schoolName": "Kipp Middle School",
+    "siteId": "0011T00002KIFpNQAX"
+  },
+  {
+    "schoolName": "Cornerstone Elementary",
+    "siteId": "0011T00002XVsG7QAL"
+  },
+  {
+    "schoolName": "Hawes Elementary School",
+    "siteId": "0011T00002KI3fJQAT"
+  },
+  {
+    "schoolName": "Garfield Elementary School",
+    "siteId": "0015000002HvvW5AAJ"
+  },
+  {
+    "schoolName": "Short Elementary School",
+    "siteId": "0015000002HvvWBAAZ"
+  },
+  {
+    "schoolName": "Korematsu Discovery Academy - Esperanza",
+    "siteId": "0015000002HvvWFAAZ"
+  },
+  {
+    "schoolName": "Elmhurst Middle School",
+    "siteId": "0015000002HvvWIAAZ"
+  },
+  {
+    "schoolName": "Sankofa Academy",
+    "siteId": "0015000002HvvWLAAZ"
+  },
+  {
+    "schoolName": "Glenview Elementary School",
+    "siteId": "0015000002HvvWMAAZ"
+  },
+  {
+    "schoolName": "Prescott Elementary School",
+    "siteId": "0015000002HvvWNAAZ"
+  },
+  {
+    "schoolName": "Bridges Academy Elementary School",
+    "siteId": "0015000002HvvWQAAZ"
+  },
+  {
+    "schoolName": "KIPP SF Bay Academy Program Site",
+    "siteId": "0015000002HvvVWAAZ"
+  },
+  {
+    "schoolName": "Mission Education Center",
+    "siteId": "0015000002HvvVcAAJ"
+  },
+  {
+    "schoolName": "Lakeshore Alternative Elementary School",
+    "siteId": "0015000002HvvVfAAJ"
+  },
+  {
+    "schoolName": "Woodrow Wilson Elementary School",
+    "siteId": "0015000002HvvVgAAJ"
+  },
+  {
+    "schoolName": "Alvarado Elementary School",
+    "siteId": "0015000002HvvViAAJ"
+  },
+  {
+    "schoolName": "Sunnyside Elementary School",
+    "siteId": "0015000002HvvVnAAJ"
+  },
+  {
+    "schoolName": "Sherman Elementary School",
+    "siteId": "0015000002HvvVqAAJ"
+  },
+  {
+    "schoolName": "Mathson Middle School",
+    "siteId": "0015000002HvvVuAAJ"
+  },
+  {
+    "schoolName": "Moscone Elementary School",
+    "siteId": "0015000002HvvVvAAJ"
+  },
+  {
+    "schoolName": "Guadalupe Elementary School",
+    "siteId": "0015000002HvvVwAAJ"
+  },
+  {
+    "schoolName": "Tenderloin Community School",
+    "siteId": "0015000002HvvW1AAJ"
+  },
+  {
+    "schoolName": "Henry Ford Elementary School",
+    "siteId": "0011T00002KI3R2QAL"
+  },
+  {
+    "schoolName": "McCoppin Elementary School",
+    "siteId": "0011T00002KHyR3QAL"
+  },
+  {
+    "schoolName": "Baywood Elementary School",
+    "siteId": "0011T00002YQINdQAP"
+  },
+  {
+    "schoolName": "Panorama Elementary School",
+    "siteId": "0011T00002N2kkWQAR"
+  },
+  {
+    "schoolName": "Indochinese Housing Development Center - Program Site",
+    "siteId": "0011T00002XUqqMQAT"
+  },
+  {
+    "schoolName": "Futures & Community United Elementary School",
+    "siteId": "0011T00002O0xVdQAJ"
+  },
+  {
+    "schoolName": "IFC San Francisco",
+    "siteId": "0011T00002QNR56QAH"
+  },
+  {
+    "schoolName": "Washington Elementary",
+    "siteId": "0011T00002bKI18QAG"
+  },
+  {
+    "schoolName": "Ramblewood Elementary",
+    "siteId": "0011T00002bKI0jQAG"
+  },
+  {
+    "schoolName": "Dahl Elementary",
+    "siteId": "0011T00002bKI1SQAW"
+  },
+  {
+    "schoolName": "Olinder Elementary",
+    "siteId": "0011T00002bKI3TQAW"
+  },
+  {
+    "schoolName": "Bayview Elementary School",
+    "siteId": "0011T00002fOkKrQAK"
+  },
+  {
+    "schoolName": "Montera Middle School",
+    "siteId": "0011T00002KIFpQQAX"
+  },
+  {
+    "schoolName": "San Francisco Community School",
+    "siteId": "0011T00002KIFpSQAX"
+  },
+  {
+    "schoolName": "Westlake Middle School",
+    "siteId": "0011T00002KIFpVQAX"
+  },
+  {
+    "schoolName": "John Gill Elementary School",
+    "siteId": "0011T00002KI3fTQAT"
+  },
+  {
+    "schoolName": "Washington",
+    "siteId": "0011T00002XVsFmQAL"
+  },
+  {
+    "schoolName": "Monroe Elementary School",
+    "siteId": "0015000002HvvVsAAJ"
+  },
+  {
+    "schoolName": "Ocala Middle School",
+    "siteId": "0015000002HvvVtAAJ"
+  },
+  {
+    "schoolName": "Franklin McKinley",
+    "siteId": "0011T00002XVsGfQAL"
+  },
+  {
+    "schoolName": "Scores Summer Camp",
+    "siteId": "0011T00002YTniuQAD"
+  },
+  {
+    "schoolName": "Bret Harte Oakland Middle School",
+    "siteId": "0011T00002WdZpVQAV"
+  },
+  {
+    "schoolName": "Mission YMCA Learning Hub",
+    "siteId": "0011T00002VrplqQAB"
+  },
+  {
+    "schoolName": "Adelante Selby Lane Elementary School",
+    "siteId": "0011T00002KI3fYQAT"
+  },
+  {
+    "schoolName": "Bret Harte",
+    "siteId": "0011T00002KIFoUQAX"
+  },
+  {
+    "schoolName": "KIPP SF Bay Academy Lead Agency",
+    "siteId": "0015000001YlC3BAAV"
+  },
+  {
+    "schoolName": "Futures Elementary School",
+    "siteId": "0011T00002O0xWQQAZ"
+  },
+  {
+    "schoolName": "Cobb School",
+    "siteId": "0011T00002Vrpl7QAB"
+  }
+]
