@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const uiConfig = {
   signInSuccessUrl: "/",
@@ -15,7 +16,7 @@ const uiConfig = {
 };
 export default function LogInScreen() {
   const history = useNavigate();
-  const user = localStorage.getItem("coach_user");
+  const user = Cookies.get("coach_user");
   if (JSON.parse(user) === true) {
     history({ pathname: "/" });
   }
