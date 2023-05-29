@@ -27,7 +27,6 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { blue } from "@mui/material/colors";
 import Loading from "../utils/Loading";
-import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,7 +70,7 @@ const CustomInputComponent = (props) => (
 );
 
 export default function EditForm(props) {
-  let phone = Cookies.get("coach_phoneNumber");
+  let phone = localStorage.getItem("coach_phoneNumber");
   const schoolIdMapping = require("../utils/school_site_id_mapping.json");
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);

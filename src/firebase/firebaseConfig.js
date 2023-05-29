@@ -4,7 +4,6 @@ import "firebase/compat/firestore";
 import "firebase/compat/functions";
 import "firebase/compat/storage";
 import "firebase/compat/analytics";
-import Cookies from "js-cookie";
 
 var firebaseConfig = {
   apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
@@ -27,11 +26,11 @@ const auth = firebase.auth();
 
 auth.onAuthStateChanged((user) => {
   if (user) {
-    Cookies.set("coach_phoneNumber", user._delegate.phoneNumber);
-    Cookies.set("coach_user", true);
+    localStorage.setItem("coach_phoneNumber", user._delegate.phoneNumber);
+    localStorage.setItem("coach_user", true);
   } else {
-    Cookies.set("coach_phoneNumber", "");
-    Cookies.set("coach_user", false);
+    localStorage.setItem("coach_phoneNumber", "");
+    localStorage.setItem("coach_user", false);
   }
 });
 

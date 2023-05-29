@@ -5,12 +5,12 @@ import Loading from "../utils/Loading";
 
 export default function HomeScreen_NewCoach() {
   const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight - 300);
+  const [height, setHeight] = useState(window.innerHeight - 260);
   const [loading, setLoading] = useState(false);
   const form_id = `${process.env.REACT_APP_TYPEFORM_FORM_ID}`;
   const updateDimensions = () => {
     setWidth(window.innerWidth);
-    setHeight(window.innerHeight - 300);
+    setHeight(window.innerHeight - 260);
   };
   const confirmedRegistration = () => {
     window.top.location.href = "https://scoresu.org/coach";
