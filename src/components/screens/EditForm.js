@@ -97,40 +97,46 @@ export default function EditForm(props) {
     setWidth(window.innerWidth);
   };
   const options = schoolsArray;
-  useEffect(async () => {
-    setRegionProps("");
-    setSchoolProps("");
-    setShow(true);
-    await getSchoolNameFromSiteId(props.coachProps.SchoolSiteId).then(
-      (result) => {
-        regionsArray.map((val, index) => {
-          let aux = schoolsName[val.value];
-          console.log(aux);
-          let finds = aux.schools.find((element) => element.value === result);
-          if (finds !== undefined) {
-            setSchoolsArray(
-              aux.schools.sort((a, b) => a.label.localeCompare(b.label))
-            );
-            setRegionProps(index);
-            const indexx = schoolsName[
-              regionsArray[index].value
-            ].schools.findIndex((object) => {
-              return object.value === finds.value;
+  useEffect(() => {
+    (async () => {
+      setRegionProps("");
+      setSchoolProps("");
+      setShow(true);
+      await getSchoolNameFromSiteId(props.coachProps.SchoolSiteId).then(
+        (result) => {
+          if (result !== undefined) {
+            regionsArray.map((val, index) => {
+              let aux = schoolsName[val.value];
+              console.log(aux);
+              let finds = aux.schools.find(
+                (element) => element.value === result
+              );
+              if (finds !== undefined) {
+                setSchoolsArray(
+                  aux.schools.sort((a, b) => a.label.localeCompare(b.label))
+                );
+                setRegionProps(index);
+                const indexx = schoolsName[
+                  regionsArray[index].value
+                ].schools.findIndex((object) => {
+                  return object.value === finds.value;
+                });
+                setSchoolProps(indexx);
+              }
             });
-            setSchoolProps(indexx);
           }
-        });
-      }
-    );
-    async function getSchoolNameFromSiteId(siteId) {
-      const results = schoolIdMapping.find(
-        (school) => JSON.stringify(school.siteId) === JSON.stringify(siteId)
+        }
       );
-      return results.schoolName;
-    }
-    setMyValue(true);
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+      async function getSchoolNameFromSiteId(siteId) {
+        const results = schoolIdMapping.find(
+          (school) => JSON.stringify(school.siteId) === JSON.stringify(siteId)
+        );
+        return results === undefined ? results : results.schoolName;
+      }
+      setMyValue(true);
+      window.addEventListener("resize", updateDimensions);
+      return () => window.removeEventListener("resize", updateDimensions);
+    })();
   }, []);
 
   async function getSchoolSiteId(schoolName) {
