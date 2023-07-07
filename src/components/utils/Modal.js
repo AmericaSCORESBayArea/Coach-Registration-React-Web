@@ -10,6 +10,7 @@ function ModalwithConfirmation(
     title: translations.modal_title,
     text: translations.modal_text,
     icon: iconType,
+    allowOutsideClick: false,
     showCancelButton: true,
     reverseButtons: true,
     confirmButtonColor: "#1976d2",
@@ -32,6 +33,7 @@ function ErrorModal(translations, iconType) {
   return Swal.fire({
     title: translations.modal_title,
     html: translations.modal_text,
+    allowOutsideClick: false,
     icon: iconType,
     confirmButtonColor: "#1976d2",
     confirmButtonText: translations.modal_close_button,
@@ -43,6 +45,7 @@ function SuccessModal(translations, iconType, dismissFunction) {
   return Swal.fire({
     title: translations.modal_title,
     html: translations.modal_text,
+    allowOutsideClick: false,
     icon: iconType,
     confirmButtonColor: "#1976d2",
     confirmButtonText: translations.modal_confirm_button,

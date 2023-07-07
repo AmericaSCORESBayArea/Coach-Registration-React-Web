@@ -6,14 +6,8 @@ import Grid from "@mui/material/Grid";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import { SuccessModal } from "../utils/Modal";
-//import { WaiverModal } from "../utils/WaiverModal";
 import dayjs, { Dayjs } from "dayjs";
-import {
-  regionsArray,
-  schoolsName,
-  genderArray,
-  ethnicityArray,
-} from "../utils/Arrays.js";
+import { genderArray, ethnicityArray } from "../utils/Arrays.js";
 import Select from "react-select";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import TextField from "@mui/material/TextField";
@@ -21,12 +15,15 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import InputAdornment from "@mui/material/InputAdornment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-//import { FormTitles } from "../utils/FormTitles";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { blue } from "@mui/material/colors";
 import Loading from "../utils/Loading";
-
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { getRegionsData, getSchoolData } from "../api/api";
+import WaiverComponent from "../utils/WaiverComponent";
 const useStyles = makeStyles((theme) => ({
   paper: {
     //display: "flex",
@@ -57,29 +54,36 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "5px",
   },
 }));
-const CustomInputComponent = (props) => (
-  <textarea
-    className="form-control"
-    cols={5}
-    rows={2}
-    type="text"
-    autoComplete="off"
-    {...props}
-  />
-);
 
 export default function EditForm(props) {
   let phone = localStorage.getItem("coach_phoneNumber");
-  const schoolIdMapping = require("../utils/school_site_id_mapping.json");
   const classes = useStyles();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(true);
   const [datepicker, setDatePicker] = useState(false);
   const [regionProps, setRegionProps] = useState("");
   const [schoolProps, setSchoolProps] = useState("");
-  const [submitBoolean, setSubmitBoolean] = useState(false);
-  const [myvalue, setMyValue] = useState(false);
-  const changesubmitBoolean = (props) => {
-    setSubmitBoolean(props);
+  const [regionsArray, setRegionsArray] = useState("");
+  const [schoolsArray, setSchoolsArray] = useState("");
+  const [waiverInfo, setWaiverInfo] = useState({
+    name: "",
+    waiverResponse: "",
+    date: "",
+    time: "",
+    contactId: "",
+    contactEmail: "",
+    waiverId: "",
+  });
+  const AcceptWaiver = (data) => {
+    setWaiverInfo((prev) => ({
+      ...prev,
+      name: data.Name,
+      waiverResponse: "Acceptance",
+      date: "",
+      time: "",
+      contactId: "",
+      contactEmail: "",
+      waiverId: data.WaiverId,
+    }));
   };
   const date = new Date();
   date.setDate(date.getDate() - 1);
@@ -92,59 +96,51 @@ export default function EditForm(props) {
   const phoneRegExp =
     /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
   const [width, setWidth] = useState(window.innerWidth);
-  const [schoolsArray, setSchoolsArray] = useState("");
   const updateDimensions = () => {
     setWidth(window.innerWidth);
   };
   const options = schoolsArray;
+
   useEffect(() => {
-    (async () => {
-      setRegionProps("");
-      setSchoolProps("");
-      setShow(true);
-      await getSchoolNameFromSiteId(props.coachProps.SchoolSiteId).then(
-        (result) => {
-          if (result !== undefined) {
-            regionsArray.map((val, index) => {
-              let aux = schoolsName[val.value];
-              console.log(aux);
-              let finds = aux.schools.find(
-                (element) => element.value === result
-              );
-              if (finds !== undefined) {
-                setSchoolsArray(
-                  aux.schools.sort((a, b) => a.label.localeCompare(b.label))
-                );
-                setRegionProps(index);
-                const indexx = schoolsName[
-                  regionsArray[index].value
-                ].schools.findIndex((object) => {
-                  return object.value === finds.value;
-                });
-                setSchoolProps(indexx);
-              }
-            });
-          }
-        }
-      );
-      async function getSchoolNameFromSiteId(siteId) {
-        const results = schoolIdMapping.find(
-          (school) => JSON.stringify(school.siteId) === JSON.stringify(siteId)
-        );
-        return results === undefined ? results : results.schoolName;
-      }
-      setMyValue(true);
-      window.addEventListener("resize", updateDimensions);
-      return () => window.removeEventListener("resize", updateDimensions);
-    })();
+    getRegionsData()
+      .then(async (response) => {
+        setRegionsArray(response);
+        if (props.coachProps.Region)
+          setRegionProps(
+            response.findIndex((r) => r.value === props.coachProps.Region)
+          );
+        else setRegionProps(undefined);
+      })
+      .catch((e) => {
+        console.log(e); // <== this **WILL** be invoked on exception
+      });
+    if (props.coachProps.Region) {
+      getSchoolData(props.coachProps.Region)
+        .then(async (response) => {
+          setSchoolsArray(response);
+          setSchoolProps(
+            response.findIndex((s) => s.id === props.coachProps.SchoolSiteId)
+          );
+          setTimeout(() => {
+            setLoading(false);
+          }, 3000);
+        })
+        .catch((e) => {
+          console.log(e); // <== this **WILL** be invoked on exception
+        });
+    } else {
+      setSchoolProps(undefined);
+      setLoading(false);
+    }
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
   async function getSchoolSiteId(schoolName) {
-    const results = schoolIdMapping.find(
-      (school) =>
-        JSON.stringify(school.schoolName) === JSON.stringify(schoolName)
+    const results = schoolsArray.find(
+      (school) => JSON.stringify(school.value) === JSON.stringify(schoolName)
     );
-    return results.siteId;
+    return results.id;
   }
   const customStyles = {
     control: (base, { isDisabled }) => ({
@@ -178,13 +174,12 @@ export default function EditForm(props) {
       PersonalEmail: data.coachEmail,
       Ethnicity: data.ethnicity,
       Gender: data.gender,
-      SchoolSiteId: schoolSiteId,
+      Region: data.schoolName.region,
+      AccountId: schoolSiteId,
     };
-    console.log(coach);
     //setLoading(true);
     const id = `${process.env.REACT_APP_CLIENT_ID}`;
     const secret = `${process.env.REACT_APP_CLIENT_SECRET}`;
-    const form_id = `${process.env.REACT_APP_TYPEFORM_FORM_ID}`;
     var myHeaders = new Headers();
     myHeaders.append("client_id", id);
     myHeaders.append("client_secret", secret);
@@ -196,27 +191,70 @@ export default function EditForm(props) {
       redirect: "follow",
       body: JSON.stringify(coach),
     };
-    console.log(props.coachProps.Id);
+    dayjs.extend(advancedFormat);
+    dayjs.extend(utc);
+    dayjs.extend(timezone);
+    const waiverData = {
+      waiverResponse: "Acceptance",
+      datetime: dayjs().format("YYYY-MM-DDTHH:mm:ssz").slice(0, -2),
+      contactId: props.coachProps.Id,
+      contactEmail: data.coachEmail,
+    };
+    var requestOptionsWaiver = {
+      method: "POST",
+      headers: myHeaders,
+      redirect: "follow",
+      body: JSON.stringify(waiverData),
+    };
     await fetch(
       `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/contacts/${props.coachProps.Id}`,
       requestOptions
     )
-      .then((response) => {
+      .then(async (response) => {
         if (response.status === 200) {
-          setLoading(false);
-          const register_modal_success = {
-            modal_title: "Successful modification",
-            modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180" 
+          await fetch(
+            `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver/${waiverInfo.waiverId}`,
+            requestOptionsWaiver
+          ).then((response) => {
+            if (response.status === 200) {
+              setLoading(false);
+              const register_modal_success = {
+                modal_title: "Successful modification",
+                modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
           height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
           height="70" /></a></b>`,
 
-            modal_confirm_button: "DONE",
-          };
-          SuccessModal(
-            register_modal_success,
-            "success",
-            confirmedRegistration
-          );
+                modal_confirm_button: "DONE",
+              };
+              SuccessModal(
+                register_modal_success,
+                "success",
+                confirmedRegistration
+              );
+            } else {
+              setLoading(false);
+              const error_modal = {
+                modal_title: "Server error [500]",
+                modal_text: `An error has occurred while saving the waiver acceptance. Please try again later. If this persists, please contact us.`,
+                modal_confirm_button: "OK",
+              };
+              SuccessModal(error_modal, "error", confirmedError);
+              setTimeout(() => {
+                const register_modal_success = {
+                  modal_title: "Successful modification",
+                  modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
+            height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
+            height="70" /></a></b>`,
+                  modal_confirm_button: "DONE",
+                };
+                SuccessModal(
+                  register_modal_success,
+                  "success",
+                  confirmedRegistration
+                );
+              }, 4500);
+            }
+          });
         } else {
           setLoading(false);
           const error_modal = {
@@ -239,7 +277,7 @@ export default function EditForm(props) {
       });
   };
 
-  return myvalue === false ? null : (
+  return (
     <Grid
       container
       component="main"
@@ -280,15 +318,14 @@ export default function EditForm(props) {
                   schoolName: {
                     region:
                       props.coachProps !== null
-                        ? regionProps !== ""
+                        ? regionProps
                           ? regionsArray[Number(regionProps)].value
                           : ""
                         : "",
                     schoolname:
                       props.coachProps !== null
-                        ? regionProps !== ""
-                          ? schoolsName[regionsArray[Number(regionProps)].value]
-                              .schools[Number(schoolProps)].value
+                        ? schoolProps
+                          ? schoolsArray[Number(schoolProps)].value
                           : ""
                         : "",
                   },
@@ -306,7 +343,7 @@ export default function EditForm(props) {
                     props.coachProps !== null ? props.coachProps.Gender : "",
                   ethnicity:
                     props.coachProps !== null ? props.coachProps.Ethnicity : "",
-                  //waiver: false,
+                  waiver: false,
                 }}
                 validationSchema={Yup.object().shape({
                   firstName: Yup.string().required("Field is required (*)"),
@@ -326,10 +363,10 @@ export default function EditForm(props) {
                   birthdate: Yup.date().max(date, "Field is required (*)"),
                   gender: Yup.string().required("Field is required (*)"),
                   ethnicity: Yup.string().required("Field is required (*)"),
-                  /* waiver: Yup.bool().oneOf(
-                [true],
-                props.formTranslations.required_waiver
-              ),*/
+                  waiver: Yup.bool().oneOf(
+                    [true],
+                    "You need to review and accept waiver (*)"
+                  ),
                 })}
                 onSubmit={(data) => {
                   setLoading(true);
@@ -349,7 +386,6 @@ export default function EditForm(props) {
                 }) => (
                   <form autoComplete="off" onSubmit={handleSubmit}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      {/*<FormTitles title={props.formTranslations.formTitle1} />*/}
                       <div className={classes.inputForm}>
                         <div
                           className="form-group"
@@ -448,7 +484,7 @@ export default function EditForm(props) {
                               styles={customStyles}
                               menuPlacement="auto"
                               defaultValue={
-                                regionProps !== ""
+                                regionProps
                                   ? regionsArray[Number(regionProps)]
                                   : ""
                               }
@@ -462,18 +498,12 @@ export default function EditForm(props) {
                                   ? " is-invalid"
                                   : "")
                               }
-                              onChange={(selectedOption) => {
-                                let region;
-                                for (region in schoolsName) {
-                                  if (region === selectedOption.value) {
-                                    let aux = schoolsName[region];
-                                    setSchoolsArray(
-                                      aux.schools.sort((a, b) =>
-                                        a.label.localeCompare(b.label)
-                                      )
-                                    );
-                                  }
-                                }
+                              onChange={async (selectedOption) => {
+                                setSchoolProps(undefined);
+                                const school = await getSchoolData(
+                                  selectedOption.value
+                                );
+                                setSchoolsArray(school);
                                 setFieldValue(
                                   "schoolName.region",
                                   selectedOption.value
@@ -499,10 +529,8 @@ export default function EditForm(props) {
                                     : false
                                 }
                                 defaultValue={
-                                  regionProps !== ""
-                                    ? schoolsName[
-                                        regionsArray[Number(regionProps)].value
-                                      ].schools[Number(schoolProps)]
+                                  schoolProps
+                                    ? schoolsArray[Number(schoolProps)]
                                     : ""
                                 }
                                 styles={customStyles}
@@ -720,56 +748,55 @@ export default function EditForm(props) {
                             className="invalid-feedback"
                           />
                         </div>
-                        {/*<div
-                      className="form-group"
-                      style={{ marginBottom: "40px" }}
-                    >
-                      <div className={classes.label}>
-                        <label htmlFor="waiver">Waiver</label>
-                      </div>
-                      <label
-                        style={{
-                          textAlign: "left",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        <Field
-                          type="checkbox"
-                          name="waiver"
-                          id="cb1"
-                          disabled={values.waiver === false ? true : false}
-                        />
-                        <Button size={"small"} onClick={() => setShow(true)}>
-                          Show waiver
-                        </Button>
-                      </label>
-                      {errors.waiver && touched.waiver ? (
                         <div
-                          style={{
-                            textAlign: "center",
-                            color: "#dc3545",
-                            fontSize: ".875em",
-                            marginTop: ".25rem",
-                          }}
+                          className="form-group"
+                          style={{ marginBottom: "40px" }}
                         >
-                          {errors.waiver}
+                          <div className={classes.label}>
+                            <label htmlFor="waiver">Waiver</label>
+                          </div>
+                          <label
+                            style={{
+                              textAlign: "left",
+                              display: "flex",
+                              justifyContent: "flex-start",
+                            }}
+                          >
+                            <Field
+                              type="checkbox"
+                              name="waiver"
+                              id="cb1"
+                              disabled={values.waiver === false ? true : false}
+                            />
+                            <Button
+                              size={"small"}
+                              onClick={() => setShow(true)}
+                            >
+                              Show waiver
+                            </Button>
+                          </label>
+                          {errors.waiver && touched.waiver ? (
+                            <div
+                              style={{
+                                textAlign: "center",
+                                color: "#dc3545",
+                                fontSize: ".875em",
+                                marginTop: ".25rem",
+                              }}
+                            >
+                              {errors.waiver}
+                            </div>
+                          ) : null}
                         </div>
-                      ) : null}
-                    </div>
-                    {show === true ? (
-                      <WaiverModal
-                        confirmButton="Accept"
-                        waiverText={
-                          props.coachProps !== null
-                            ? props.waiver.newwaiver
-                            : props.waiver.waiver
-                        }
-                        deniedButton="Dismiss"
-                        function={() => setShow(false)}
-                        checkboxFunction={setFieldValue}
-                      />
-                      ) : null}*/}
+                        {show === true ? (
+                          <WaiverComponent
+                            confirmButton="Accept"
+                            deniedButton="Dismiss"
+                            function={() => setShow(false)}
+                            checkboxFunction={setFieldValue}
+                            addWaiverData={AcceptWaiver}
+                          />
+                        ) : null}
                         <div
                           className="form-group"
                           style={{
@@ -785,7 +812,6 @@ export default function EditForm(props) {
                               variant="contained"
                               disabled={loading}
                               onClick={() => {
-                                setSubmitBoolean(true);
                                 handleSubmit();
                               }}
                             >
