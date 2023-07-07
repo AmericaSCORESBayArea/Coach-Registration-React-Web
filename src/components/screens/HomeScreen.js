@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import HomeScreen_NewCoach from "./HomeScreen_NewCoach";
 import EditForm from "./EditForm";
 import Loading from "../utils/Loading";
@@ -6,6 +6,7 @@ export default function HomeScreen() {
   const [newCoach, setNewCoach] = useState(null);
   const [coachData, setCoachData] = useState();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     async function getContactInfo(phoneNumberProp) {
       phoneNumberProp = phoneNumberProp.slice(2);
@@ -39,6 +40,7 @@ export default function HomeScreen() {
             )
               .then((response) => response.json())
               .then((data) => {
+                console.log(data[0]);
                 setLoading(false);
                 setCoachData(data[0]);
                 setNewCoach(false);
