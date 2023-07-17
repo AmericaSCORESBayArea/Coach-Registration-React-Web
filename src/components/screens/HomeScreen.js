@@ -1,7 +1,8 @@
-import { useState, useEffect, useReducer } from "react";
-import HomeScreen_NewCoach from "./HomeScreen_NewCoach";
+import { useState, useEffect } from "react";
+import HomeScreenNewCoach from "./HomeScreenNewCoach";
 import EditForm from "./EditForm";
 import Loading from "../utils/Loading";
+
 export default function HomeScreen() {
   const [newCoach, setNewCoach] = useState(null);
   const [coachData, setCoachData] = useState();
@@ -57,7 +58,7 @@ export default function HomeScreen() {
       {loading ? (
         <Loading />
       ) : newCoach === true ? (
-        <HomeScreen_NewCoach />
+        <HomeScreenNewCoach />
       ) : (
         <EditForm coachProps={coachData} />
       )}
