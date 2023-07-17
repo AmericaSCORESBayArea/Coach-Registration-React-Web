@@ -1,5 +1,5 @@
 import { SuccessModal } from "../utils/Modal";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
@@ -119,6 +119,11 @@ export async function handleSubmitTypeform(response, waiverInfo, stopLoading) {
   dayjs.extend(advancedFormat);
   dayjs.extend(utc);
   dayjs.extend(timezone);
+  let timeZone = dayjs()
+    .format("z")
+    .toString()
+    .replace(/\d+/g, "")
+    .replace(/[^\w\s]/gi, "");
   const form_id = `${process.env.REACT_APP_TYPEFORM_FORM_ID}`;
   const confirmedRegistration = () => {
     window.top.location.href = "https://scoresu.org/coach";
@@ -140,10 +145,11 @@ export async function handleSubmitTypeform(response, waiverInfo, stopLoading) {
     const coachInfo = await fetchContactInfo(json);
     const waiverData = {
       waiverResponse: "Acceptance",
-      datetime: dayjs().format("YYYY-MM-DDTHH:mm:ssz").slice(0, -2),
+      datetime: dayjs().format("YYYY-MM-DDTHH:mm:ss") + timeZone,
       contactId: coachInfo[0].Id,
       contactEmail: coachInfo[0].PersonalEmail,
     };
+    console.log(waiverData);
     var requestOptionsWaiver = {
       method: "POST",
       headers: myHeaders,

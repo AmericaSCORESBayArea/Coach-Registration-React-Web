@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import { SuccessModal } from "../utils/Modal";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { genderArray, ethnicityArray } from "../utils/Arrays.js";
 import Select from "react-select";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
@@ -194,9 +194,14 @@ export default function EditForm(props) {
     dayjs.extend(advancedFormat);
     dayjs.extend(utc);
     dayjs.extend(timezone);
+    let timeZone = dayjs()
+      .format("z")
+      .toString()
+      .replace(/\d+/g, "")
+      .replace(/[^\w\s]/gi, "");
     const waiverData = {
       waiverResponse: "Acceptance",
-      datetime: dayjs().format("YYYY-MM-DDTHH:mm:ssz").slice(0, -2),
+      datetime: dayjs().format("YYYY-MM-DDTHH:mm:ss") + timeZone,
       contactId: props.coachProps.Id,
       contactEmail: data.coachEmail,
     };
