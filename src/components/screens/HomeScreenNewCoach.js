@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { Widget } from "@typeform/embed-react";
-import { SuccessModal } from "../utils/Modal";
 import Loading from "../utils/Loading";
 import WaiverComponent from "../utils/WaiverComponent";
 import { handleSubmitTypeform } from "../api/api";
-export default function HomeScreen_NewCoach(props) {
+export default function HomeScreenNewCoach(props) {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight - 260);
   const [loading, setLoading] = useState(false);
@@ -70,5 +69,3 @@ export default function HomeScreen_NewCoach(props) {
     </div>
   );
 }
-
-/* <div id="myDiv"></div>calling waiver formatted*/
