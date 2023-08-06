@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -23,7 +23,7 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { getRegionsData, getSchoolData } from "../api/api";
-import WaiverComponent from "../utils/WaiverComponent";
+//import WaiverComponent from "../utils/WaiverComponent";
 const useStyles = makeStyles((theme) => ({
   paper: {
     //display: "flex",
@@ -64,27 +64,27 @@ export default function EditForm(props) {
   const [schoolProps, setSchoolProps] = useState("");
   const [regionsArray, setRegionsArray] = useState("");
   const [schoolsArray, setSchoolsArray] = useState("");
-  const [waiverInfo, setWaiverInfo] = useState({
-    name: "",
-    waiverResponse: "",
-    date: "",
-    time: "",
-    contactId: "",
-    contactEmail: "",
-    waiverId: "",
-  });
-  const AcceptWaiver = (data) => {
-    setWaiverInfo((prev) => ({
-      ...prev,
-      name: data.Name,
-      waiverResponse: "Acceptance",
-      date: "",
-      time: "",
-      contactId: "",
-      contactEmail: "",
-      waiverId: data.WaiverId,
-    }));
-  };
+  // const [waiverInfo, setWaiverInfo] = useState({
+  //   name: "",
+  //   waiverResponse: "",
+  //   date: "",
+  //   time: "",
+  //   contactId: "",
+  //   contactEmail: "",
+  //   waiverId: "",
+  // });
+  // const AcceptWaiver = (data) => {
+  //   setWaiverInfo((prev) => ({
+  //     ...prev,
+  //     name: data.Name,
+  //     waiverResponse: "Acceptance",
+  //     date: "",
+  //     time: "",
+  //     contactId: "",
+  //     contactEmail: "",
+  //     waiverId: data.WaiverId,
+  //   }));
+  // };
   const date = new Date();
   date.setDate(date.getDate() - 1);
   const ethnicityOptions = ethnicityArray.sort((a, b) =>
@@ -157,7 +157,7 @@ export default function EditForm(props) {
       textAlign: "left",
     }),
   };
-  const [show, setShow] = useState(false);
+  //const [show, setShow] = useState(false);
   const confirmedError = () => {
     setLoading(false);
   };
@@ -191,75 +191,81 @@ export default function EditForm(props) {
       redirect: "follow",
       body: JSON.stringify(coach),
     };
-    dayjs.extend(advancedFormat);
-    dayjs.extend(utc);
-    dayjs.extend(timezone);
-    let timeZone = dayjs()
-      .format("z")
-      .toString()
-      .replace(/\d+/g, "")
-      .replace(/[^\w\s]/gi, "");
-    const waiverData = {
-      waiverResponse: "Acceptance",
-      datetime: dayjs().format("YYYY-MM-DDTHH:mm:ss") + timeZone,
-      contactId: props.coachProps.Id,
-      contactEmail: data.coachEmail,
-    };
-    var requestOptionsWaiver = {
-      method: "POST",
-      headers: myHeaders,
-      redirect: "follow",
-      body: JSON.stringify(waiverData),
-    };
+    // dayjs.extend(advancedFormat);
+    // dayjs.extend(utc);
+    // dayjs.extend(timezone);
+    // let timeZone = dayjs()
+    //   .format("z")
+    //   .toString()
+    //   .replace(/\d+/g, "")
+    //   .replace(/[^\w\s]/gi, "");
+    // const waiverData = {
+    //   waiverResponse: "Acceptance",
+    //   datetime: dayjs().format("YYYY-MM-DDTHH:mm:ss") + timeZone,
+    //   contactId: props.coachProps.Id,
+    //   contactEmail: data.coachEmail,
+    // };
+    // var requestOptionsWaiver = {
+    //   method: "POST",
+    //   headers: myHeaders,
+    //   redirect: "follow",
+    //   body: JSON.stringify(waiverData),
+    // };
     await fetch(
       `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/contacts/${props.coachProps.Id}`,
       requestOptions
     )
       .then(async (response) => {
         if (response.status === 200) {
-          await fetch(
-            `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver/${waiverInfo.waiverId}`,
-            requestOptionsWaiver
-          ).then((response) => {
-            if (response.status === 200) {
-              setLoading(false);
-              const register_modal_success = {
-                modal_title: "Successful modification",
-                modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
-          height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
-          height="70" /></a></b>`,
+          setLoading(false);
+          const register_modal_success = {
+            modal_title: "Successful modification",
+            modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
+      height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
+      height="70" /></a></b>`,
 
-                modal_confirm_button: "DONE",
-              };
-              SuccessModal(
-                register_modal_success,
-                "success",
-                confirmedRegistration
-              );
-            } else {
-              setLoading(false);
-              const error_modal = {
-                modal_title: "Server error [500]",
-                modal_text: `An error has occurred while saving the waiver acceptance. Please try again later. If this persists, please contact us.`,
-                modal_confirm_button: "OK",
-              };
-              SuccessModal(error_modal, "error", confirmedError);
-              setTimeout(() => {
-                const register_modal_success = {
-                  modal_title: "Successful modification",
-                  modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
-            height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
-            height="70" /></a></b>`,
-                  modal_confirm_button: "DONE",
-                };
-                SuccessModal(
-                  register_modal_success,
-                  "success",
-                  confirmedRegistration
-                );
-              }, 4500);
-            }
-          });
+            modal_confirm_button: "DONE",
+          };
+          SuccessModal(
+            register_modal_success,
+            "success",
+            confirmedRegistration
+          );
+
+          // await fetch(
+          //   `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver/${waiverInfo.waiverId}`,
+          //   requestOptionsWaiver
+          // ).then((response) => {
+          //   if (response.status === 200) {
+          //     SuccessModal(
+          //       register_modal_success,
+          //       "success",
+          //       confirmedRegistration
+          //     );
+          //   } else {
+          //     setLoading(false);
+          //     const error_modal = {
+          //       modal_title: "Server error [500]",
+          //       modal_text: `An error has occurred while saving the waiver acceptance. Please try again later. If this persists, please contact us.`,
+          //       modal_confirm_button: "OK",
+          //     };
+          //     SuccessModal(error_modal, "error", confirmedError);
+          //     setTimeout(() => {
+          //       const register_modal_success = {
+          //         modal_title: "Successful modification",
+          //         modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
+          //   height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
+          //   height="70" /></a></b>`,
+          //         modal_confirm_button: "DONE",
+          //       };
+          //       SuccessModal(
+          //         register_modal_success,
+          //         "success",
+          //         confirmedRegistration
+          //       );
+          //     }, 4500);
+          //   }
+          // });
         } else {
           setLoading(false);
           const error_modal = {
@@ -348,7 +354,7 @@ export default function EditForm(props) {
                     props.coachProps !== null ? props.coachProps.Gender : "",
                   ethnicity:
                     props.coachProps !== null ? props.coachProps.Ethnicity : "",
-                  waiver: false,
+                  //waiver: false,
                 }}
                 validationSchema={Yup.object().shape({
                   firstName: Yup.string().required("Field is required (*)"),
@@ -368,10 +374,10 @@ export default function EditForm(props) {
                   birthdate: Yup.date().max(date, "Field is required (*)"),
                   gender: Yup.string().required("Field is required (*)"),
                   ethnicity: Yup.string().required("Field is required (*)"),
-                  waiver: Yup.bool().oneOf(
-                    [true],
-                    "You need to review and accept waiver (*)"
-                  ),
+                  // waiver: Yup.bool().oneOf(
+                  //   [true],
+                  //   "You need to review and accept waiver (*)"
+                  // ),
                 })}
                 onSubmit={(data) => {
                   setLoading(true);
@@ -753,7 +759,7 @@ export default function EditForm(props) {
                             className="invalid-feedback"
                           />
                         </div>
-                        <div
+                        {/* <div
                           className="form-group"
                           style={{ marginBottom: "40px" }}
                         >
@@ -792,8 +798,8 @@ export default function EditForm(props) {
                               {errors.waiver}
                             </div>
                           ) : null}
-                        </div>
-                        {show === true ? (
+                        </div> */}
+                        {/* {show === true ? (
                           <WaiverComponent
                             confirmButton="Accept"
                             deniedButton="Dismiss"
@@ -801,7 +807,7 @@ export default function EditForm(props) {
                             checkboxFunction={setFieldValue}
                             addWaiverData={AcceptWaiver}
                           />
-                        ) : null}
+                        ) : null} */}
                         <div
                           className="form-group"
                           style={{

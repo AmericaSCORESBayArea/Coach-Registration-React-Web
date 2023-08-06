@@ -1,8 +1,8 @@
 import { SuccessModal } from "../utils/Modal";
-import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
+// import dayjs from "dayjs";
+// import advancedFormat from "dayjs/plugin/advancedFormat";
+// import utc from "dayjs/plugin/utc";
+// import timezone from "dayjs/plugin/timezone";
 
 const id = `${process.env.REACT_APP_CLIENT_ID}`;
 const secret = `${process.env.REACT_APP_CLIENT_SECRET}`;
@@ -114,16 +114,16 @@ export async function fetchContactInfo(param) {
   return json;
 }
 
-export async function handleSubmitTypeform(response, waiverInfo, stopLoading) {
-  console.log("param", response);
-  dayjs.extend(advancedFormat);
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
-  let timeZone = dayjs()
-    .format("z")
-    .toString()
-    .replace(/\d+/g, "")
-    .replace(/[^\w\s]/gi, "");
+export async function handleSubmitTypeform(response, stopLoading) {
+  // console.log("param", response);
+  // dayjs.extend(advancedFormat);
+  // dayjs.extend(utc);
+  // dayjs.extend(timezone);
+  // let timeZone = dayjs()
+  //   .format("z")
+  //   .toString()
+  //   .replace(/\d+/g, "")
+  //   .replace(/[^\w\s]/gi, "");
   const form_id = `${process.env.REACT_APP_TYPEFORM_FORM_ID}`;
   const confirmedRegistration = () => {
     window.top.location.href = "https://scoresu.org/coach";
@@ -141,59 +141,56 @@ export async function handleSubmitTypeform(response, waiverInfo, stopLoading) {
       `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/typeform/responses?formId=${form_id}&responseId=${response.responseId}`,
       requestOptions
     );
-    const json = await responsee.json();
-    const coachInfo = await fetchContactInfo(json);
-    const waiverData = {
-      waiverResponse: "Acceptance",
-      datetime: dayjs().format("YYYY-MM-DDTHH:mm:ss") + timeZone,
-      contactId: coachInfo[0].Id,
-      contactEmail: coachInfo[0].PersonalEmail,
-    };
-    console.log(waiverData);
-    var requestOptionsWaiver = {
-      method: "POST",
-      headers: myHeaders,
-      redirect: "follow",
-      body: JSON.stringify(waiverData),
-    };
+    //const json = await responsee.json();
+    //const coachInfo = await fetchContactInfo(json);
+    // const waiverData = {
+    //   waiverResponse: "Acceptance",
+    //   datetime: dayjs().format("YYYY-MM-DDTHH:mm:ss") + timeZone,
+    //   contactId: coachInfo[0].Id,
+    //   contactEmail: coachInfo[0].PersonalEmail,
+    // };
+    // console.log(waiverData);
+    // var requestOptionsWaiver = {
+    //   method: "POST",
+    //   headers: myHeaders,
+    //   redirect: "follow",
+    //   body: JSON.stringify(waiverData),
+    // };
     if (responsee.status === 200) {
-      await fetch(
-        `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver/${waiverInfo.waiverId}`,
-        requestOptionsWaiver
-      ).then((response) => {
-        if (response.status === 200) {
-          stopLoading();
-          const register_modal_success = {
-            modal_title: "Successful modification",
-            modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
-          height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
-          height="70" /></a></b>`,
-
-            modal_confirm_button: "DONE",
-          };
-          SuccessModal(
-            register_modal_success,
-            "success",
-            confirmedRegistration
-          );
-        } else {
-          const error_modal = {
-            modal_title: "Server error [500]",
-            modal_text: `An error has occurred while saving the waiver acceptance. Please try again later. If this persists, please contact us.`,
-            modal_confirm_button: "OK",
-          };
-          SuccessModal(error_modal, "error", confirmedError);
-        }
-      });
+      stopLoading();
       const register_modal_success = {
-        modal_title: "Successful registration",
-        modal_text: `You have been successfully registered.<br /><b style="font-size:17px;" align="center">Download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
-    height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
-    height="70" /></a></b>`,
+        modal_title: "Successful modification",
+        modal_text: `Your information has been successfully modified.<br /><b style="font-size:17px;" align="center">Remember to download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
+      height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
+      height="70" /></a></b>`,
 
         modal_confirm_button: "DONE",
       };
       SuccessModal(register_modal_success, "success", confirmedRegistration);
+      //   await fetch(
+      //     `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver/${waiverInfo.waiverId}`,
+      //     requestOptionsWaiver
+      //   ).then((response) => {
+      //     if (response.status === 200) {
+      //     } else {
+      //       const error_modal = {
+      //         modal_title: "Server error [500]",
+      //         modal_text: `An error has occurred while saving the waiver acceptance. Please try again later. If this persists, please contact us.`,
+      //         modal_confirm_button: "OK",
+      //       };
+      //       SuccessModal(error_modal, "error", confirmedError);
+      //     }
+      //   });
+      //   const register_modal_success = {
+      //     modal_title: "Successful registration",
+      //     modal_text: `You have been successfully registered.<br /><b style="font-size:17px;" align="center">Download our app to start taking attendance.<br /><br /><a target="_parent" href="https://apps.apple.com/us/app/america-scores-attendance/id1527435979"><img src="https://iili.io/HOqRSRf.png" width="180"
+      // height="70" /></a> <a target="_parent" href="https://play.google.com/store/apps/details?id=com.americaScoresAttendance.app&hl=es_AR&gl=US"><img src="https://iili.io/HOq59WB.png" width="180"
+      // height="70" /></a></b>`,
+
+      //     modal_confirm_button: "DONE",
+      //   };
+      //   SuccessModal(register_modal_success, "success", confirmedRegistration);
+      // }
     }
   } catch (error) {
     const error_modal = {

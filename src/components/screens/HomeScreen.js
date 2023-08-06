@@ -41,7 +41,6 @@ export default function HomeScreen() {
             )
               .then((response) => response.json())
               .then((data) => {
-                console.log(data[0]);
                 setLoading(false);
                 setCoachData(data[0]);
                 setNewCoach(false);
