@@ -19,10 +19,10 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { blue } from "@mui/material/colors";
 import Loading from "../utils/Loading";
-import advancedFormat from "dayjs/plugin/advancedFormat";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
 import { getRegionsData, getSchoolData } from "../api/api";
+// import advancedFormat from "dayjs/plugin/advancedFormat";
+// import utc from "dayjs/plugin/utc";
+// import timezone from "dayjs/plugin/timezone";
 //import WaiverComponent from "../utils/WaiverComponent";
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -105,11 +105,11 @@ export default function EditForm(props) {
     getRegionsData()
       .then(async (response) => {
         setRegionsArray(response);
-        if (props.coachProps.Region)
+        if (props.coachProps.Region) {
           setRegionProps(
             response.findIndex((r) => r.value === props.coachProps.Region)
           );
-        else setRegionProps(undefined);
+        } else setRegionProps(undefined);
       })
       .catch((e) => {
         console.log(e); // <== this **WILL** be invoked on exception
@@ -384,17 +384,7 @@ export default function EditForm(props) {
                   handleSubmit(data);
                 }}
               >
-                {({
-                  values,
-                  touched,
-                  isSubmitting,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  setFieldValue,
-                  errors,
-                  formik,
-                }) => (
+                {({ values, touched, handleSubmit, setFieldValue, errors }) => (
                   <form autoComplete="off" onSubmit={handleSubmit}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <div className={classes.inputForm}>
@@ -493,6 +483,8 @@ export default function EditForm(props) {
                             </div>
                             <Select
                               styles={customStyles}
+                              searchable={false}
+                              blurInputOnSelect={true}
                               menuPlacement="auto"
                               defaultValue={
                                 regionProps
@@ -509,16 +501,12 @@ export default function EditForm(props) {
                                   ? " is-invalid"
                                   : "")
                               }
-                              onChange={async (selectedOption) => {
+                              onChange={async ({ value }) => {
                                 setSchoolProps(undefined);
-                                const school = await getSchoolData(
-                                  selectedOption.value
-                                );
+                                const school = await getSchoolData(value);
                                 setSchoolsArray(school);
-                                setFieldValue(
-                                  "schoolName.region",
-                                  selectedOption.value
-                                );
+                                setFieldValue("schoolName.region", value);
+                                setFieldValue("schoolName.schoolname", "");
                               }}
                             />
                             <ErrorMessage
@@ -539,14 +527,20 @@ export default function EditForm(props) {
                                     ? true
                                     : false
                                 }
-                                defaultValue={
+                                searchable={false}
+                                blurInputOnSelect={true}
+                                value={
                                   schoolProps
                                     ? schoolsArray[Number(schoolProps)]
-                                    : ""
+                                    : schoolsArray.filter(
+                                        (s) =>
+                                          s.value ===
+                                          values.schoolName.schoolname
+                                      )
                                 }
                                 styles={customStyles}
                                 menuPlacement="auto"
-                                placeholder="School or Facility Name"
+                                placeholder="School Name"
                                 name="schoolName.schoolname"
                                 options={options}
                                 className={
@@ -556,12 +550,9 @@ export default function EditForm(props) {
                                     ? " is-invalid"
                                     : "")
                                 }
-                                onChange={(selectedOption) =>
-                                  setFieldValue(
-                                    "schoolName.schoolname",
-                                    selectedOption.value
-                                  )
-                                }
+                                onChange={({ value }) => {
+                                  setFieldValue("schoolName.schoolname", value);
+                                }}
                               />
                             </div>
                             <ErrorMessage
@@ -602,8 +593,8 @@ export default function EditForm(props) {
                         >
                           <div className={classes.label}>
                             <label htmlFor="coachphoneNumber">
-                              Phone Number* (This will be the phone number you
-                              will use to access your scores account)
+                              Phone Number* (This will be the number you will
+                              use to access your Accounts)
                             </label>
                           </div>
                           <Field
@@ -692,6 +683,8 @@ export default function EditForm(props) {
                             <label htmlFor="gender">Gender*</label>
                           </div>
                           <Select
+                            searchable={false}
+                            blurInputOnSelect={true}
                             styles={customStyles}
                             defaultValue={
                               props.coachProps !== null
@@ -729,6 +722,8 @@ export default function EditForm(props) {
                             <label htmlFor="ethnicity">Ethnicity*</label>
                           </div>
                           <Select
+                            searchable={false}
+                            blurInputOnSelect={true}
                             styles={customStyles}
                             menuPlacement="auto"
                             defaultValue={
