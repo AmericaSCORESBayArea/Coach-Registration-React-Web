@@ -28,7 +28,7 @@ export async function getRegionsData() {
         label: region.RegionName ? region.RegionName : undefined,
       };
     });
-    remapped = remapped.filter((e) => e);
+    remapped = remapped.filter((e) => e.value !== undefined);
     remapped = remapped.sort((a, b) => a.label.localeCompare(b.label));
     return remapped;
   } catch (error) {

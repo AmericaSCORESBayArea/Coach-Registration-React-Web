@@ -107,7 +107,7 @@ export default function EditForm(props) {
         setRegionsArray(response);
         if (props.coachProps.Region) {
           setRegionProps(
-            response.findIndex((r) => r.value === props.coachProps.Region)
+            response.find((r) => r.value === props.coachProps.Region)
           );
         } else setRegionProps(undefined);
       })
@@ -119,7 +119,7 @@ export default function EditForm(props) {
         .then(async (response) => {
           setSchoolsArray(response);
           setSchoolProps(
-            response.findIndex((s) => s.id === props.coachProps.SchoolSiteId)
+            response.find((s) => s.id === props.coachProps.SchoolSiteId)
           );
           setTimeout(() => {
             setLoading(false);
@@ -287,7 +287,6 @@ export default function EditForm(props) {
         console.log("error", error);
       });
   };
-
   return (
     <Grid
       container
@@ -330,13 +329,13 @@ export default function EditForm(props) {
                     region:
                       props.coachProps !== null
                         ? regionProps
-                          ? regionsArray[Number(regionProps)].value
+                          ? regionProps.value
                           : ""
                         : "",
                     schoolname:
                       props.coachProps !== null
                         ? schoolProps
-                          ? schoolsArray[Number(schoolProps)].value
+                          ? schoolProps.value
                           : ""
                         : "",
                   },
@@ -482,13 +481,17 @@ export default function EditForm(props) {
                               </label>
                             </div>
                             <Select
+                              isSearchable={false}
                               styles={customStyles}
-                              searchable={false}
-                              blurInputOnSelect={true}
                               menuPlacement="auto"
-                              defaultValue={
+                              value={
                                 regionProps
-                                  ? regionsArray[Number(regionProps)]
+                                  ? regionProps
+                                  : regionsArray
+                                  ? regionsArray.filter(
+                                      (s) =>
+                                        s.value === values.schoolName.region
+                                    )
                                   : ""
                               }
                               name="schoolName.region"
@@ -502,6 +505,7 @@ export default function EditForm(props) {
                                   : "")
                               }
                               onChange={async ({ value }) => {
+                                setRegionProps(undefined);
                                 setSchoolProps(undefined);
                                 const school = await getSchoolData(value);
                                 setSchoolsArray(school);
@@ -522,21 +526,22 @@ export default function EditForm(props) {
                                 SCORES Site Name*
                               </label>
                               <Select
+                                isSearchable={false}
                                 isDisabled={
                                   values.schoolName.region.length === 0
                                     ? true
                                     : false
                                 }
-                                searchable={false}
-                                blurInputOnSelect={true}
                                 value={
                                   schoolProps
-                                    ? schoolsArray[Number(schoolProps)]
-                                    : schoolsArray.filter(
+                                    ? schoolProps
+                                    : schoolsArray
+                                    ? schoolsArray.filter(
                                         (s) =>
                                           s.value ===
                                           values.schoolName.schoolname
                                       )
+                                    : ""
                                 }
                                 styles={customStyles}
                                 menuPlacement="auto"
@@ -683,8 +688,7 @@ export default function EditForm(props) {
                             <label htmlFor="gender">Gender*</label>
                           </div>
                           <Select
-                            searchable={false}
-                            blurInputOnSelect={true}
+                            isSearchable={false}
                             styles={customStyles}
                             defaultValue={
                               props.coachProps !== null
@@ -722,8 +726,7 @@ export default function EditForm(props) {
                             <label htmlFor="ethnicity">Ethnicity*</label>
                           </div>
                           <Select
-                            searchable={false}
-                            blurInputOnSelect={true}
+                            isSearchable={false}
                             styles={customStyles}
                             menuPlacement="auto"
                             defaultValue={
