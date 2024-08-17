@@ -36,7 +36,7 @@ export default function HomeScreen() {
             setLoading(false);
           } else {
             await fetch(
-              `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/contacts/${data.ContactId}`,
+              `${process.env.REACT_APP_BASEURL}/contacts/${data.ContactId}`,
               requestOptions
             )
               .then((response) => response.json())

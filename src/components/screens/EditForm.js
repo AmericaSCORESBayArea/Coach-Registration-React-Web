@@ -212,7 +212,7 @@ export default function EditForm(props) {
     //   body: JSON.stringify(waiverData),
     // };
     await fetch(
-      `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/contacts/${props.coachProps.Id}`,
+      `${process.env.REACT_APP_BASEURL}/contacts/${props.coachProps.Id}`,
       requestOptions
     )
       .then(async (response) => {
@@ -233,7 +233,7 @@ export default function EditForm(props) {
           );
 
           // await fetch(
-          //   `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver/${waiverInfo.waiverId}`,
+          //   `${process.env.REACT_APP_BASEURL}/waiver/${waiverInfo.waiverId}`,
           //   requestOptionsWaiver
           // ).then((response) => {
           //   if (response.status === 200) {
