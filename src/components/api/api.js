@@ -18,7 +18,7 @@ export async function getRegionsData() {
       redirect: "follow",
     };
     const response = await fetch(
-      `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/regions`,
+      `${process.env.REACT_APP_BASEURL}/regions`,
       requestOptions
     );
     const json = await response.json();
@@ -53,7 +53,7 @@ export async function getWaiver() {
       redirect: "follow",
     };
     const response = await fetch(
-      `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver?region=Other`,
+      `${process.env.REACT_APP_BASEURL}/waiver?region=Other`,
       requestOptions
     );
     const json = await response.json();
@@ -71,7 +71,7 @@ export async function getSchoolData(regionName) {
       redirect: "follow",
     };
     const response = await fetch(
-      `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/regions/${regionName}/schoolsites`,
+      `${process.env.REACT_APP_BASEURL}/regions/${regionName}/schoolsites`,
       requestOptions
     );
     const json = await response.json();
@@ -107,7 +107,7 @@ export async function fetchContactInfo(param) {
     redirect: "follow",
   };
   const response = await fetch(
-    `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/contacts/${param.ContactId}`,
+    `${process.env.REACT_APP_BASEURL}/contacts/${param.ContactId}`,
     requestOptions
   );
   const json = await response.json();
@@ -138,7 +138,7 @@ export async function handleSubmitTypeform(response, stopLoading) {
       redirect: "follow",
     };
     const responsee = await fetch(
-      `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/typeform/responses?formId=${form_id}&responseId=${response.responseId}`,
+      `${process.env.REACT_APP_BASEURL}/typeform/responses?formId=${form_id}&responseId=${response.responseId}`,
       requestOptions
     );
     //const json = await responsee.json();
@@ -168,7 +168,7 @@ export async function handleSubmitTypeform(response, stopLoading) {
       };
       SuccessModal(register_modal_success, "success", confirmedRegistration);
       //   await fetch(
-      //     `https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/waiver/${waiverInfo.waiverId}`,
+      //     `${process.env.REACT_APP_BASEURL}/waiver/${waiverInfo.waiverId}`,
       //     requestOptionsWaiver
       //   ).then((response) => {
       //     if (response.status === 200) {
