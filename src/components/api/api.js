@@ -18,7 +18,7 @@ export async function getRegionsData() {
       redirect: "follow",
     };
     const response = await fetch(
-      `${process.env.REACT_APP_BASEURL}/regions`,
+      `${process.env.REACT_APP_BASEURL}/regions/active`,
       requestOptions
     );
     const json = await response.json();
